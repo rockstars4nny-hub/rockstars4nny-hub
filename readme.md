@@ -125,7 +125,3 @@ Result: 0 false reports shipped to Immunefi, 0 submittable bugs — the correct 
 | `ARIA-anti-hallucination-ENS.md` | ENS anti-hallucination case study |
 
 ---
-
-*Compiled from the "Findings" self-email dated 2026-07-08 (15 attachments). Severity and verification status reflect each source document as written; where documents disagreed on verification level (e.g. the consolidated portfolio calling F-3/F-4 "source-verified" vs. the disclosure draft itself flagging them as unverified skeletons), the more conservative claim was used.*
-
-Findings and Capabilities 
