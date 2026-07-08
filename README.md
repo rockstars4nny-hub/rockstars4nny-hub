@@ -1,4 +1,4 @@
-# rockstars4nny-hub
+#  rockstars4nny-hub
 # Security Research Portfolio — ARIA / Area44 LLC
 
 Smart-contract and Web3 security findings, compiled from active bug-bounty/audit-contest engagements. Methodology: white-box source review (recon → reentrancy → oracle → flash-loan → access control → arithmetic → bridge → governance) with adversarial multi-pass verification before anything ships.
