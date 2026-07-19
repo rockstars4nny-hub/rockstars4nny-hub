@@ -1,5 +1,96 @@
-#  rockstars4nny-hub
+
 # Security Research Portfolio — ARIA / AIP
+
+
+NASA VDP Findings
+
+Bugcrowd | NASA Vulnerability Disclosure Program
+
+Overview
+
+I discovered and reported multiple information disclosure vulnerabilities within the NASA Vulnerability Disclosure Program (VDP) on Bugcrowd. All findings involved publicly accessible internal documents labeled "For NASA Internal Use Only."
+
+---
+
+Findings
+
+1. Internal Strategic Planning Document (P1 — Critical)
+
+· Target: hq.nasa.gov
+· URL: https://www.hq.nasa.gov/pao/FOIA/ESAS/ESAS_Appendix_4D.pdf
+· Severity: P1 (Critical)
+· Category: Sensitive Data Exposure > Disclosure of Secrets > For Publicly Accessible Asset
+· Description: A 90-page internal NASA document, the "LEAG Special Action Team (SAT) Report" (ESAS Appendix 4D), was found publicly accessible. The document is explicitly marked "For NASA Internal Use Only" and contains internal strategic planning information including organizational structure, lunar science objectives, critical surface activity requirements, ISRU strategies, and Mars exploration planning.
+
+2. Crew Performance Data (P1 — Critical)
+
+· Target: hq.nasa.gov
+· URL: https://www.hq.nasa.gov/office/pao/FOIA/ESAS/ESAS_Appendix_5E.pdf
+· Severity: P1 (Critical)
+· Category: Sensitive Data Exposure > Disclosure of Secrets > For Publicly Accessible Asset
+· Description: A second internal NASA document marked "For NASA Internal Use Only" was discovered. The document contains "Section 5E: Crew G-Limit Curves," revealing internal human factors and crew performance data, including maximum allowable g-load limits for conditioned and de-conditioned crew, and abort scenario parameters.
+
+3. Astrophysics Source Code Exposure (P3 — Medium)
+
+· Target: swift.gsfc.nasa.gov
+· URL: https://swift.gsfc.nasa.gov/sdc/procdoc/proc3.16.04/subs_uvotproduct_code.html
+· Severity: P3 (Medium)
+· Category: Sensitive Data Exposure > Disclosure of Secrets > For Publicly Accessible Asset
+· Description: Perl source code for NASA's Swift satellite data processing pipeline was discovered exposed on a public web server. The source code contained internal system paths, database logic, email watcher lists, and system commands.
+
+---
+
+Impact
+
+All findings were reported through Bugcrowd's NASA VDP. The P1 findings represent critical information disclosure vulnerabilities that could be leveraged by adversaries to understand NASA's strategic priorities, operational constraints, and internal capabilities.
+
+Status
+
+· Finding 1: In Progress — Submitted 19 Jul 2026
+· Finding 2: Ready to Submit — Identified 19 Jul 2026
+· Finding 3: In Progress — Submitted 19 Jul 2026
+
+Tools Used
+
+· Google Dorking (site:nasa.gov "For NASA Internal Use Only" filetype:pdf)
+· Subdomain enumeration
+· Manual recon and discovery
+· Bugcrowd submission workflow
+
+---
+
+Lessons Learned
+
+· Legacy systems are fertile ground for information disclosure. NASA's FOIA archives contain numerous internal documents that were never properly reviewed for public release.
+· Directory browsing and Google dorking are effective reconnaissance techniques for discovering sensitive files.
+· Internal markings ("For NASA Internal Use Only") are clear indicators of sensitive content and should be reported immediately.
+
+---
+
+🔍 Recon Command I Used
+
+```bash
+googler -n 100 "site:hq.nasa.gov 'For NASA Internal Use Only' filetype:pdf"
+```
+
+---
+
+📋 Submission Template (Reusable)
+
+I created a reusable report template that I adapted for each finding. It follows Bugcrowd's VRT for "Sensitive Data Exposure" and includes:
+
+· Clear title with document marking
+· URL and target
+· Description of contents and impact
+· Proof of Concept steps
+· Recommended fix
+
+---
+
+⚠️ Note
+
+This portfolio entry is for professional recognition purposes only. All testing was conducted in compliance with NASA's VDP policy and Bugcrowd's Responsible Disclosure guidelines. No data was altered, deleted, or accessed beyond what was publicly exposed
+
 
 # AMRI — 
 Agent Manipulation Resistance Index
