@@ -1,3 +1,57 @@
+## Vulnerability Discoveries
+**Last Updated:** 20 July 2026
+
+All findings identified through passive reconnaissance (Google Dorking / OSINT) – no active scanning, brute‑forcing, or unauthorized access performed against any target.
+
+---
+
+### 1. NASA – Internal Document Disclosure (ESAS Appendix 4D)
+- **Target:** `https://nasa.gov`
+- **URL:** `https://www.hq.nasa.gov/pao/FOIA/ESAS/ESAS_Appendix_4D.pdf`
+- **VRT:** Sensitive Data Exposure > Disclosure of Secrets > For Internal Asset
+- **Priority:** P5
+- **Status:** Informational / Duplicate
+- **Submitted:** 19 July 2026
+- **Description:** A 90‑page internal NASA document, the *LEAG Special Action Team (SAT) Report* (ESAS Appendix 4D), was publicly accessible. Nearly every page is marked "For NASA Internal Use Only." The document contained internal organizational structure, personnel (Section 4D Participants), lunar science strategic objectives, and critical surface activity requirements for lunar exploration.
+
+---
+
+### 2. NASA – Internal Document Disclosure (Crew G‑Limit Curves)
+- **Target:** `https://nasa.gov`
+- **URL:** `https://www.hq.nasa.gov/office/pao/FOIA/ESAS/ESAS_Appendix_5E.pdf`
+- **VRT:** Sensitive Data Exposure > Disclosure of Known Public Information
+- **Priority:** P5
+- **Status:** Informational / Duplicate
+- **Submitted:** 19 July 2026
+- **Description:** A second internal NASA document, *Section 5E: Crew G‑Limit Curves*, was publicly accessible. The first page is explicitly marked "For NASA Internal Use Only." It contained human factors and crew performance data, including maximum allowable g‑load limit curves across six directions (+/- X, Y, Z), design limits for conditioned/de‑conditioned crews, and abort scenario parameters.
+
+---
+
+### 3. NASA – Exposed Perl Source Code
+- **Target:** `https://nasa.gov`
+- **URL:** `https://swift.gsfc.nasa.gov/sdc/procdo/proc3.16.04/subs_uvotproduct_code.html`
+- **VRT:** Sensitive Data Exposure > Disclosure of Secrets > For Internal Asset
+- **Priority:** P3
+- **Status:** New (still being assessed / in progress)
+- **Submitted:** 19 July 2026
+- **Description:** Full Perl module source code was exposed on a NASA subdomain. The exposed code contained internal catalog paths and internal processing logic – information not intended for public release. This submission remains under assessment by the NASA VDP team.
+
+---
+
+### 4. Cyprus Legal Information Institute (cylaw.org) – Credential Store Exposure
+- **Target:** `https://www.cylaw.org`
+- **URL:** `https://www.cylaw.org/nomoi/enop/backup/cybarlegis/zips/export/full20240628-0951/db/system/users.xml`
+- **Status:** Reported (pending response)
+- **Submitted:** 20 July 2026
+- **Description:** A Tomcat `UserDatabaseRealm` configuration file was discovered within a dated backup/export directory. The file contained usernames alongside password hashes in two formats (MD5 and digest). The path itself (`/backup/[...]/export/`) indicates backup artifacts are being written to a web‑servable location and indexed by search engines.
+- **Impact:** If active, this could allow account takeover on systems tied to their legal case‑law database. Even if expired, it confirms a systemic misconfiguration that requires remediation.
+- **Action Taken:** Reported responsibly via email to `info@cylaw.org` with actionable remediation steps (directory restriction, credential rotation, Google de‑indexing, and backup process review).
+
+---
+
+### Methodology
+All findings were discovered using broad, non‑targeted **Google dorking** – searching secret‑indicator terms (`api_key`, `password`, `token`, `private_key`) combined with common config/data filetypes (`.xml`, `.env`, `.json`, `.pdf`, `.html`) and filtered to exclude documentation, code‑hosting platforms, and placeholder content. No crawling, directory enumeration, or direct probing was performed against any of the affected assets.
+
 
 # Security Research Portfolio — ARIA / AIP
 
