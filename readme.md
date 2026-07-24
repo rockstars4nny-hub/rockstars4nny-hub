@@ -52,6 +52,65 @@ All findings identified through passive reconnaissance (Google Dorking / OSINT) 
 ### Methodology
 All findings were discovered using broad, non‑targeted **Google dorking** – searching secret‑indicator terms (`api_key`, `password`, `token`, `private_key`) combined with common config/data filetypes (`.xml`, `.env`, `.json`, `.pdf`, `.html`) and filtered to exclude documentation, code‑hosting platforms, and placeholder content. No crawling, directory enumeration, or direct probing was performed against any of the affected assets.
 
+# AIP — AI Security Researcher
+
+Solo founder, Area44 LLC (Aetherverse Intelligence Protocol). Web3/smart contract security, AI/LLM red teaming, offensive security tooling, OSINT.
+
+## Background
+
+Currently a Registered Behavior Technician (RBT) working with autistic children, with a background in psychology. Also currently training AI models — for the past year and a half, as part of Handshake AI's data labeling work for companies including Anthropic — direct, hands-on exposure to how reinforcement signals shape model behavior. Current role at Handshake AI is titled AI Security Engineer / Red Teamer. Built out AI and cybersecurity work alongside both over the past year, with the last 6 months as a dedicated deep-dive into offensive security.
+
+## What I've Built
+
+**ARIA** — offensive security framework, built from a 9-agent Claude Code system (ARIA-1–9) up to 30+ specialized skill files spanning:
+- Web3: EVM, Move/Sui, Cairo/Starknet, Cosmos/IBC
+- Web2 pentest, IoT/embedded, mobile red team, agentic AI red teaming, vehicle/CAN bus
+
+Notable skill files: **AMRI** (Agent Manipulation Resistance Index — an open standard for evaluating AI agents against manipulation), **C.R.U.C.I.B.L.E.** (OSINT due diligence framework), **T.R.A.C.E.**, **Q.E.D.**, **F.O.R.G.E.**, **L.E.D.G.E.R.**, **S.O.U.R.C.E.**
+
+**LLM Red Teaming & Adversarial AI Security** — core specialty, developed through the Handshake AI role:
+- Advanced LLM red-teaming campaigns: multi-turn jailbreaks, prompt injection attacks, adversarial payload design
+- Covert data exfiltration research: exfiltration chains, payload detection/decoding/stripping
+- Obfuscation techniques: Unicode obfuscation, emoji steganography, token-smuggling, zero-width characters, variation selectors, tag-based encoding
+- Model fingerprinting and behavioral analysis of AI alignment/guardrail weaknesses
+- Built and maintain **T.A.P. v8 — The Aetherverse Protocol**: a production-grade, browser-based automated testing pipeline with direct Anthropic API integration, batch vulnerability evaluation, real-time bypass scoring, payload detection/stripping, and audit logging
+
+**Tool suite** (sold via Gumroad/Whop):
+- **T.A.P. AUTOMATE** — recon orchestrator
+- **W.R.A.I.T.H.** — EVM audit tool with a live Foundry fork backend for exploit PoC simulation
+- **CICI** — 46-module OSINT platform
+- **LLM Red Team Pro**
+- *Build Your Own Bug Bounty Agent* — bug bounty course
+
+**Research / bounty work** — Sherlock, Code4rena, Immunefi, HackerOne, HackenProof, including verified dreUSD findings (F-1–F-4), a Rujira THORChain medium-severity finding, and a HackerOne AI model-safety report documenting a social-pressure override of a correct model refusal.
+
+**Fiction** — Author of *The Aetherverse Protocol: Chronicles of the Foundry*, a sci-fi trilogy whose characters and doctrine inform ARIA's naming and design philosophy.
+
+## Technical Skills
+
+- **Languages/tooling:** Python (advanced scripting & tooling), JavaScript/HTML/CSS (full-stack SPAs), Fetch API, DOM manipulation, responsive design
+- **Offensive security tools:** Burp Suite, Nmap, Metasploit
+- **UI/design:** cyberpunk/neon interfaces, custom REPL tooling
+
+## Certifications & Training
+
+- Cisco Certificate in Ethical Hacking (Cisco Networking Academy)
+- 60+ TryHackMe rooms completed (Red Teaming, Junior Penetration Tester, SOC Level 1)
+- Self-directed research: OWASP LLM Top 10, jailbreak literature, adversarial ML techniques
+- Psychology coursework (90+ credits) — Shepherd University, Towson University, UMGC
+
+## What I Bring
+
+- **Behavioral science applied to AI security** — ABA's reinforcement-and-compliance model maps directly onto how both humans and LLMs get manipulated, socially engineered, or jailbroken. This is the core methodology behind AMRI.
+- **Firsthand model-training and red-teaming experience** — training data and running adversarial campaigns for frontier labs means understanding the reinforcement pipeline AMRI is designed to stress-test from both sides of the table.
+- **OSINT + behavioral pattern analysis** — clinical training in reading behavioral data translates into CRUCIBLE's approach to digital-behavior threat profiling.
+
+## Contact
+
+- Email: rockstars4nny@gmail.com
+- GitHub: [rockstars4nny-hub](https://github.com/rockstars4nny-hub)
+- YouTube: rockstars4nny
+
 
 # Security Research Portfolio — ARIA / AIP
 
