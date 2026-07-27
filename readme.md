@@ -4,7 +4,7 @@
 
 **Date:** July 2026  
 **Platform:** Immunefi (Origin Protocol)  
-**Status:** Submitted, awaiting triage  
+**Status:** Private  
 
 ---
 
