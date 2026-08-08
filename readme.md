@@ -1,121 +1,30 @@
-## Vulnerability Discoveries
-**Last Updated:** 20 July 2026
-
-All findings identified through passive reconnaissance (Google Dorking / OSINT) – no active scanning, brute‑forcing, or unauthorized access performed against any target.
-
----
-
-### 1. NASA – Internal Document Disclosure (ESAS Appendix 4D)
-- **Target:** `https://nasa.gov`
-- **URL:** `https://www.hq.nasa.gov/pao/FOIA/ESAS/ESAS_Appendix_4D.pdf`
-- **VRT:** Sensitive Data Exposure > Disclosure of Secrets > For Internal Asset
-- **Priority:** P5
-- **Status:** Informational / Duplicate
-- **Submitted:** 19 July 2026
-- **Description:** A 90‑page internal NASA document, the *LEAG Special Action Team (SAT) Report* (ESAS Appendix 4D), was publicly accessible. Nearly every page is marked "For NASA Internal Use Only." The document contained internal organizational structure, personnel (Section 4D Participants), lunar science strategic objectives, and critical surface activity requirements for lunar exploration.
-
----
-
-### 2. NASA – Internal Document Disclosure (Crew G‑Limit Curves)
-- **Target:** `https://nasa.gov`
-- **URL:** `https://www.hq.nasa.gov/office/pao/FOIA/ESAS/ESAS_Appendix_5E.pdf`
-- **VRT:** Sensitive Data Exposure > Disclosure of Known Public Information
-- **Priority:** P5
-- **Status:** Informational / Duplicate
-- **Submitted:** 19 July 2026
-- **Description:** A second internal NASA document, *Section 5E: Crew G‑Limit Curves*, was publicly accessible. The first page is explicitly marked "For NASA Internal Use Only." It contained human factors and crew performance data, including maximum allowable g‑load limit curves across six directions (+/- X, Y, Z), design limits for conditioned/de‑conditioned crews, and abort scenario parameters.
-
----
-
-### 3. NASA – Exposed Perl Source Code
-- **Target:** `https://nasa.gov`
-- **URL:** `https://swift.gsfc.nasa.gov/sdc/procdo/proc3.16.04/subs_uvotproduct_code.html`
-- **VRT:** Sensitive Data Exposure > Disclosure of Secrets > For Internal Asset
-- **Priority:** P3
-- **Status:** New (still being assessed / in progress)
-- **Submitted:** 19 July 2026
-- **Description:** Full Perl module source code was exposed on a NASA subdomain. The exposed code contained internal catalog paths and internal processing logic – information not intended for public release. This submission remains under assessment by the NASA VDP team.
-
----
-
-### 4. Cyprus Legal Information Institute (cylaw.org) – Credential Store Exposure
-- **Target:** `https://www.cylaw.org`
-- **URL:** `https://www.cylaw.org/nomoi/enop/backup/cybarlegis/zips/export/full20240628-0951/db/system/users.xml`
-- **Status:** Reported (pending response)
-- **Submitted:** 20 July 2026
-- **Description:** A Tomcat `UserDatabaseRealm` configuration file was discovered within a dated backup/export directory. The file contained usernames alongside password hashes in two formats (MD5 and digest). The path itself (`/backup/[...]/export/`) indicates backup artifacts are being written to a web‑servable location and indexed by search engines.
-- **Impact:** If active, this could allow account takeover on systems tied to their legal case‑law database. Even if expired, it confirms a systemic misconfiguration that requires remediation.
-- **Action Taken:** Reported responsibly via email to `info@cylaw.org` with actionable remediation steps (directory restriction, credential rotation, Google de‑indexing, and backup process review).
-
----
-
-### Methodology
-All findings were discovered using broad, non‑targeted **Google dorking** – searching secret‑indicator terms (`api_key`, `password`, `token`, `private_key`) combined with common config/data filetypes (`.xml`, `.env`, `.json`, `.pdf`, `.html`) and filtered to exclude documentation, code‑hosting platforms, and placeholder content. No crawling, directory enumeration, or direct probing was performed against any of the affected assets.
-
 # AIP — AI Security Researcher
 
 Solo founder, Area44 LLC (Aetherverse Intelligence Protocol). Web3/smart contract security, AI/LLM red teaming, offensive security tooling, OSINT.
 
-## Background
+---
 
-Currently a Registered Behavior Technician (RBT) working with autistic children, with a background in psychology. Also currently training AI models — for the past year and a half, as part of Handshake AI's data labeling work for companies including Anthropic — direct, hands-on exposure to how reinforcement signals shape model behavior. Current role at Handshake AI is titled AI Security Engineer / Red Teamer. Built out AI and cybersecurity work alongside both over the past year, with the last 6 months as a dedicated deep-dive into offensive security.
+## Case study: catching hallucinations before they ship (ENS engagement)
 
-## What I've Built
+During the ENS review, ARIA's finder agents raised three plausible-sounding "Critical" candidates that a separate adversarial coordinator pass killed by tracing each to its real sink:
 
-**ARIA** — offensive security framework, built from a 9-agent Claude Code system (ARIA-1–9) up to 30+ specialized skill files spanning:
-- Web3: EVM, Move/Sui, Cairo/Starknet, Cosmos/IBC
-- Web2 pentest, IoT/embedded, mobile red team, agentic AI red teaming, vehicle/CAN bus
+1. **"Critical stored XSS via ENS name in SVG"** — killed: normalized names can't contain SVG metacharacters (ENSIP-15), and the rendering iframe is sandboxed without `allow-scripts`.
+2. **"Critical reentrancy in `_regenerate()`"** — killed: the burn leg uses `to = address(0)` (no callback fires), and the mint callback is the last operation with no state writes after it.
+3. **"High DoS via `_hasZeroNybbles` borrow propagation"** — killed by static proof: the SWAR bit-trick's cross-nybble borrow artifact can be shown never to flip the function's boolean result.
 
-Notable skill files: **AMRI** (Agent Manipulation Resistance Index — an open standard for evaluating AI agents against manipulation), **C.R.U.C.I.B.L.E.** (OSINT due diligence framework), **T.R.A.C.E.**, **Q.E.D.**, **F.O.R.G.E.**, **L.E.D.G.E.R.**, **S.O.U.R.C.E.**
+Result: 0 false reports shipped to Immunefi, 0 submittable bugs — the correct outcome for a heavily-audited target. Full writeup: `ARIA-anti-hallucination-ENS.md`.
 
-**LLM Red Teaming & Adversarial AI Security** — core specialty, developed through the Handshake AI role:
-- Advanced LLM red-teaming campaigns: multi-turn jailbreaks, prompt injection attacks, adversarial payload design
-- Covert data exfiltration research: exfiltration chains, payload detection/decoding/stripping
-- Obfuscation techniques: Unicode obfuscation, emoji steganography, token-smuggling, zero-width characters, variation selectors, tag-based encoding
-- Model fingerprinting and behavioral analysis of AI alignment/guardrail weaknesses
-- Built and maintain **T.A.P. v8 — The Aetherverse Protocol**: a production-grade, browser-based automated testing pipeline with direct Anthropic API integration, batch vulnerability evaluation, real-time bypass scoring, payload detection/stripping, and audit logging
+Related clean verdicts from the same engagement family:
 
-**Tool suite** (sold via Gumroad/Whop):
-- **T.A.P. AUTOMATE** — recon orchestrator
-- **W.R.A.I.T.H.** — EVM audit tool with a live Foundry fork backend for exploit PoC simulation
-- **CICI** — 46-module OSINT platform
-- **LLM Red Team Pro**
-- *Build Your Own Bug Bounty Agent* — bug bounty course
+| Target | Scope | Verdict |
+|---|---|---|
+| ENS contracts-v2 (Namechain) | 61 contracts, all severities | ⭕ Clean — anti-hallucination case study above |
+| ENS `ens-contracts` | Root/Registrar controllers + DNSSEC verifier | ⭕ Clean — access control correct; verifier fails closed |
+| ENS metadata-service (web) | SVG/XSS/SSRF | ⭕ Clean — see case study above |
 
-**Research / bounty work** — Sherlock, Code4rena, Immunefi, HackerOne, HackenProof, including verified dreUSD findings (F-1–F-4), a Rujira THORChain medium-severity finding, and a HackerOne AI model-safety report documenting a social-pressure override of a correct model refusal.
+---
 
-**Fiction** — Author of *The Aetherverse Protocol: Chronicles of the Foundry*, a sci-fi trilogy whose characters and doctrine inform ARIA's naming and design philosophy.
-
-## Technical Skills
-
-- **Languages/tooling:** Python (advanced scripting & tooling), JavaScript/HTML/CSS (full-stack SPAs), Fetch API, DOM manipulation, responsive design
-- **Offensive security tools:** Burp Suite, Nmap, Metasploit
-- **UI/design:** cyberpunk/neon interfaces, custom REPL tooling
-
-## Certifications & Training
-
-- Cisco Certificate in Ethical Hacking (Cisco Networking Academy)
-- 60+ TryHackMe rooms completed (Red Teaming, Junior Penetration Tester, SOC Level 1)
-- Self-directed research: OWASP LLM Top 10, jailbreak literature, adversarial ML techniques
-- Psychology coursework (90+ credits) — Shepherd University, Towson University, UMGC
-
-## What I Bring
-
-- **Behavioral science applied to AI security** — ABA's reinforcement-and-compliance model maps directly onto how both humans and LLMs get manipulated, socially engineered, or jailbroken. This is the core methodology behind AMRI.
-- **Firsthand model-training and red-teaming experience** — training data and running adversarial campaigns for frontier labs means understanding the reinforcement pipeline AMRI is designed to stress-test from both sides of the table.
-- **OSINT + behavioral pattern analysis** — clinical training in reading behavioral data translates into CRUCIBLE's approach to digital-behavior threat profiling.
-
-## Contact
-
-- Email: rockstars4nny@gmail.com
-- GitHub: [rockstars4nny-hub](https://github.com/rockstars4nny-hub)
-- YouTube: rockstars4nny
-
-
-# Security Research Portfolio — ARIA / AIP
-
-# AMRI — 
-Agent Manipulation Resistance Index
+# AMRI — Agent Manipulation Resistance Index
 
 An open framework for testing whether AI agents can be socially engineered into violating their own operating constraints. AMRI is the agent-facing analog of phishing-simulation testing for humans: instead of measuring whether a person clicks a malicious link, it measures whether an autonomous agent complies with a manipulative instruction it should refuse.
 
@@ -233,10 +142,67 @@ Recommended: MIT or CC-BY-4.0 for the methodology text, so it can be freely adop
 
 ---
 
-*Maintained by Aetherverse Intelligence Protocol 
+*Maintained by Aetherverse Intelligence Protocol*
 
+---
 
-#  rockstars4nny-hub
+# Background
+
+Currently a Registered Behavior Technician (RBT) working with autistic children, with a background in psychology. Also currently training AI models — for the past year and a half, as part of Handshake AI's data labeling work for companies including Anthropic — direct, hands-on exposure to how reinforcement signals shape model behavior. Current role at Handshake AI is titled AI Security Engineer / Red Teamer. Built out AI and cybersecurity work alongside both over the past year, with the last 6 months as a dedicated deep-dive into offensive security.
+
+## What I've Built
+
+**ARIA** — offensive security framework, built from a 9-agent Claude Code system (ARIA-1–9) up to 30+ specialized skill files spanning:
+- Web3: EVM, Move/Sui, Cairo/Starknet, Cosmos/IBC
+- Web2 pentest, IoT/embedded, mobile red team, agentic AI red teaming, vehicle/CAN bus
+
+Notable skill files: **AMRI** (Agent Manipulation Resistance Index — an open standard for evaluating AI agents against manipulation), **C.R.U.C.I.B.L.E.** (OSINT due diligence framework), **T.R.A.C.E.**, **Q.E.D.**, **F.O.R.G.E.**, **L.E.D.G.E.R.**, **S.O.U.R.C.E.**
+
+**LLM Red Teaming & Adversarial AI Security** — core specialty, developed through the Handshake AI role:
+- Advanced LLM red-teaming campaigns: multi-turn jailbreaks, prompt injection attacks, adversarial payload design
+- Covert data exfiltration research: exfiltration chains, payload detection/decoding/stripping
+- Obfuscation techniques: Unicode obfuscation, emoji steganography, token-smuggling, zero-width characters, variation selectors, tag-based encoding
+- Model fingerprinting and behavioral analysis of AI alignment/guardrail weaknesses
+- Built and maintain **T.A.P. v8 — The Aetherverse Protocol**: a production-grade, browser-based automated testing pipeline with direct Anthropic API integration, batch vulnerability evaluation, real-time bypass scoring, payload detection/stripping, and audit logging
+
+**Tool suite** (sold via Gumroad/Whop):
+- **T.A.P. AUTOMATE** — recon orchestrator
+- **W.R.A.I.T.H.** — EVM audit tool with a live Foundry fork backend for exploit PoC simulation
+- **CICI** — 46-module OSINT platform
+- **LLM Red Team Pro**
+- *Build Your Own Bug Bounty Agent* — bug bounty course
+
+**Research / bounty work** — Sherlock, Code4rena, Immunefi, HackerOne, HackenProof, including verified dreUSD findings (F-1–F-4), a Rujira THORChain medium-severity finding, and a HackerOne AI model-safety report documenting a social-pressure override of a correct model refusal.
+
+**Fiction** — Author of *The Aetherverse Protocol: Chronicles of the Foundry*, a sci-fi trilogy whose characters and doctrine inform ARIA's naming and design philosophy.
+
+## Technical Skills
+
+- **Languages/tooling:** Python (advanced scripting & tooling), JavaScript/HTML/CSS (full-stack SPAs), Fetch API, DOM manipulation, responsive design
+- **Offensive security tools:** Burp Suite, Nmap, Metasploit
+- **UI/design:** cyberpunk/neon interfaces, custom REPL tooling
+
+## Certifications & Training
+
+- Cisco Certificate in Ethical Hacking (Cisco Networking Academy)
+- 60+ TryHackMe rooms completed (Red Teaming, Junior Penetration Tester, SOC Level 1)
+- Self-directed research: OWASP LLM Top 10, jailbreak literature, adversarial ML techniques
+- Psychology coursework (90+ credits) — Shepherd University, Towson University, UMGC
+
+## What I Bring
+
+- **Behavioral science applied to AI security** — ABA's reinforcement-and-compliance model maps directly onto how both humans and LLMs get manipulated, socially engineered, or jailbroken. This is the core methodology behind AMRI.
+- **Firsthand model-training and red-teaming experience** — training data and running adversarial campaigns for frontier labs means understanding the reinforcement pipeline AMRI is designed to stress-test from both sides of the table.
+- **OSINT + behavioral pattern analysis** — clinical training in reading behavioral data translates into CRUCIBLE's approach to digital-behavior threat profiling.
+
+## Contact
+
+- Email: rockstars4nny@gmail.com
+- GitHub: [rockstars4nny-hub](https://github.com/rockstars4nny-hub)
+- YouTube: rockstars4nny
+
+---
+
 # Security Research Portfolio — ARIA / AIP
 
 Smart-contract and Web3 security findings, compiled from active bug-bounty/audit-contest engagements. Methodology: white-box source review (recon → reentrancy → oracle → flash-loan → access control → arithmetic → bridge → governance) with adversarial multi-pass verification before anything ships.
@@ -289,14 +255,6 @@ Process note: an initial recon pass produced 9 hypotheses; a dedupe pass against
 
 Root cause: the fee-decay ratio is computed against **post-subtraction** `pending` instead of the original value. Any single distribution paying out 50–100% of `pending` makes the ratio exceed 1.0, and `Decimal::one() - ratio` underflows and panics — reverting the swap. State self-heals once a full `revenue_smear` period elapses without activity. Two additional leads (a `thorchain-swap` bad-debt window, and a `staking` donation-accounting quirk) were flagged but not confirmed — they need live pool/oracle state to resolve.
 
-### Moonwell — Code4rena
-
-| ID | Title | Severity | Verification |
-|---|---|---|---|
-| F-10 | `ChainlinkOracle` missing max-age/heartbeat validation — a frozen feed is served indefinitely | Medium (honestly, more realistically Low/Informational) | ✅ **PoC-PASS** — executed on a live Base mainnet fork against the real USDC/USD feed; 30-day warp produced no revert |
-
-Caveats logged in the writeup: high duplicate risk (a commonly reported Compound-fork oracle pattern; the program excludes prior-audit findings), and the live market's routing through this exact oracle instance still needs reconfirming before submission.
-
 ### tokenize.it — HackenProof
 
 | ID | Title | Severity | Verification |
@@ -314,23 +272,13 @@ A clean verdict is a real deliverable, not a non-result — these are documented
 | Moonwell `MErc20Delegator` (mcbETH) | Delegatecall proxy, Base | ✅ Clean — 7 passing fork tests; the "scary"-looking public `delegateToImplementation` proven non-escalating |
 | Uniswap UNI token | mint / transfer / transferFrom / permit | ✅ Clean — 4 passing fork tests + live `cast` calls; no theft/inflation path reachable |
 | Intuition V2 (deployed scope) | TRUST token + Hub/Spoke bridges | ⭕ Clean — no unprivileged Critical/High path; value flow is role-gated |
-| ENS contracts-v2 (Namechain) | 61 contracts, all severities | ⭕ Clean — see anti-hallucination case study below |
+| ENS contracts-v2 (Namechain) | 61 contracts, all severities | ⭕ Clean — see anti-hallucination case study above |
 | ENS `ens-contracts` | Root/Registrar controllers + DNSSEC verifier | ⭕ Clean — access control correct; verifier fails closed |
-| ENS metadata-service (web) | SVG/XSS/SSRF | ⭕ Clean — see case study below |
+| ENS metadata-service (web) | SVG/XSS/SSRF | ⭕ Clean — see case study above |
 | Variational Omni (Arbitrum perps) | `SettlementPoolFactory`/`SettlementPool` | ⭕ Inconclusive — blocked on private/embargoed source; the only drain path found is single-EOA owner centralization (out of scope) |
 | GMX V2 — liquidation & ADL path | `LiquidationUtils`/`AdlUtils`/`PositionUtils` | ⭕ Clean — an initial "funding fees excluded from liquidation calc" lead was falsified against literal source; fees are included via `totalCostAmount` |
 | GMX V2 — Data Streams reference-price validation | `Oracle.sol` / `ChainlinkDataStreamProvider` | ⭕ Clean, by-design — synthetic markets intentionally have no reference feed; Data Streams reports are independently signed and verified. One informational note filed (the report doesn't honor `expiresAt`) |
 | Inverse Finance JuniorDola | `jDola` / `FiRMSlashingModule` / `WithdrawalEscrow` | ⭕ Clean — two near-miss false positives caught and disproven (slash-cap underflow, "unbounded" slash trigger); informational hardening notes only. **Scope unconfirmed** — the Immunefi scope page 404'd during review, so confirm JuniorDola is actually in-bounty before submitting anything from this engagement |
-
-### Case study: catching hallucinations before they ship (ENS engagement)
-
-During the ENS review, ARIA's finder agents raised three plausible-sounding "Critical" candidates that a separate adversarial coordinator pass killed by tracing each to its real sink:
-
-1. **"Critical stored XSS via ENS name in SVG"** — killed: normalized names can't contain SVG metacharacters (ENSIP-15), and the rendering iframe is sandboxed without `allow-scripts`.
-2. **"Critical reentrancy in `_regenerate()`"** — killed: the burn leg uses `to = address(0)` (no callback fires), and the mint callback is the last operation with no state writes after it.
-3. **"High DoS via `_hasZeroNybbles` borrow propagation"** — killed by static proof: the SWAR bit-trick's cross-nybble borrow artifact can be shown never to flip the function's boolean result.
-
-Result: 0 false reports shipped to Immunefi, 0 submittable bugs — the correct outcome for a heavily-audited target. Full writeup: `ARIA-anti-hallucination-ENS.md`.
 
 ---
 
@@ -341,9 +289,8 @@ Result: 0 false reports shipped to Immunefi, 0 submittable bugs — the correct 
 | DRE dreUSD | Sherlock #1259 | F-1, F-2 submitted; F-3, F-4 disclosed | Contest closed |
 | Sentiment V2 | Sherlock BB #37 | F-5–F-9 | Program not live → portfolio/disclosure |
 | Rujira | Sherlock BB #366 | M-01 + 2 unconfirmed leads | Not yet submitted |
-| Moonwell | Code4rena | F-10 + 1 clean contract (N1) | F-10 pending submission |
 | tokenize.it | HackenProof | F-11 | — |
-| Uniswap, Intuition, ENS (×3), Variational, GMX V2 (×2), Inverse Finance | Various | Clean / proven-negative | Documented, no submission |
+| Uniswap, Intuition, ENS (×3), Variational, GMX V2 (×2), Inverse Finance, Moonwell (clean) | Various | Clean / proven-negative | Documented, no submission |
 
 ---
 
@@ -363,3 +310,41 @@ Result: 0 false reports shipped to Immunefi, 0 submittable bugs — the correct 
 | `ARIA-anti-hallucination-ENS.md` | ENS anti-hallucination case study |
 
 ---
+
+## Informational — OSINT / passive recon notes
+
+**Severity:** Informational only. Passive Google dorking / OSINT — no active scanning, brute-forcing, or unauthorized access. Not portfolio lead findings.
+
+### NASA – Internal Document Disclosure (ESAS Appendix 4D) — Informational
+- **Target:** `https://nasa.gov`
+- **URL:** `https://www.hq.nasa.gov/pao/FOIA/ESAS/ESAS_Appendix_4D.pdf`
+- **VRT:** Sensitive Data Exposure > Disclosure of Secrets > For Internal Asset
+- **Priority:** P5
+- **Status:** Informational / Duplicate
+- **Submitted:** 19 July 2026
+- **Description:** A 90‑page internal NASA document, the *LEAG Special Action Team (SAT) Report* (ESAS Appendix 4D), was publicly accessible. Nearly every page is marked "For NASA Internal Use Only."
+
+### NASA – Internal Document Disclosure (Crew G‑Limit Curves) — Informational
+- **Target:** `https://nasa.gov`
+- **URL:** `https://www.hq.nasa.gov/office/pao/FOIA/ESAS/ESAS_Appendix_5E.pdf`
+- **VRT:** Sensitive Data Exposure > Disclosure of Known Public Information
+- **Priority:** P5
+- **Status:** Informational / Duplicate
+- **Submitted:** 19 July 2026
+- **Description:** *Section 5E: Crew G‑Limit Curves* was publicly accessible; first page marked "For NASA Internal Use Only."
+
+### NASA – Exposed Perl Source Code — Informational
+- **Target:** `https://nasa.gov`
+- **URL:** `https://swift.gsfc.nasa.gov/sdc/procdo/proc3.16.04/subs_uvotproduct_code.html`
+- **VRT:** Sensitive Data Exposure > Disclosure of Secrets > For Internal Asset
+- **Priority:** P5 (Informational)
+- **Status:** Informational
+- **Submitted:** 19 July 2026
+- **Description:** Full Perl module source code was exposed on a NASA subdomain (internal catalog paths / processing logic). Logged as informational only.
+
+### Cyprus Legal Information Institute (cylaw.org) – Credential Store Exposure — Informational
+- **Target:** `https://www.cylaw.org`
+- **URL:** `https://www.cylaw.org/nomoi/enop/backup/cybarlegis/zips/export/full20240628-0951/db/system/users.xml`
+- **Status:** Reported (pending response) / Informational portfolio note
+- **Submitted:** 20 July 2026
+- **Description:** A Tomcat `UserDatabaseRealm` config in a dated backup/export directory contained usernames alongside password hashes. Reported to `info@cylaw.org` with remediation steps.
