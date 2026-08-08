@@ -152,6 +152,18 @@ Currently a Registered Behavior Technician (RBT) working with autistic children,
 
 ## What I've Built
 
+### Recent tools (past 30 days)
+
+| Tool | What it is | Link |
+|---|---|---|
+| **Finch / THE MACHINE v3.5** | Local AIP operator console — one engage bar routes name, address, plate, domain, wallet, or LAN/CIDR into cyber intel, POI, and Glass IoT fabric. Assessor GIS owners, public-record property cards, F.O.R.G.E. fork-strict Web3, AES-256-GCM vault | [Finch](https://github.com/rockstars4nny-hub/Finch) · code in [PT](https://github.com/rockstars4nny-hub/PT) |
+| **POI** | Person-of-interest workflow on Finch — identity, place (assessor owner), plate→seller cascade, footprint scorecard, Visage face enroll | [POI](https://github.com/rockstars4nny-hub/POI) |
+| **AIP Web Suites** | Standalone browser consoles: Web2 (OSINT + Pentest Matrix) and Web3 (Chain Intel + Audit Matrix) with **Fork Lab** — Audit Matrix unlocks only after real `forge test --fork-url` (`FORK_EXECUTED`) | [aip-web-suites](https://github.com/rockstars4nny-hub/aip-web-suites) |
+| **P.S.M. 3.0** | Phishing Simulation Module (G.H.O.S.T.) — 100 Web2/Web3 lures, engagement auth gate, fingerprint tracker + webhook, lookalike domains, vishing/bulk/ATT&CK, CICI export | [PSM](https://github.com/rockstars4nny-hub/PSM--Phishing-Simulation-) |
+| **IoT Offensive Security Research Tool** | Authorized camera/drone/embedded assessor CLI (`iot_scanner` v1.1) — UART, firmware dump/analyze, network ports, MAVLink, BLE GATT | [iot-offensive-security-research-tool](https://github.com/rockstars4nny-hub/iot-offensive-security-research-tool) |
+| **Cyber Intelligence Framework** | Digital fingerprinting methodology for authorized threat assessment — 7 intel domains, correlation, risk scoring, graph output | [cyber-intelligence-](https://github.com/rockstars4nny-hub/cyber-intelligence-) |
+| **BLE Hound** | BLE security research stack — passive sniff (Sniffle/nRF), live dissection, active GATT, findings engine, sandboxed DSL, AES-CCM decrypt, pcapng/JSON export | local / in progress |
+
 **ARIA** — offensive security framework, built from a 9-agent Claude Code system (ARIA-1–9) up to 30+ specialized skill files spanning:
 - Web3: EVM, Move/Sui, Cairo/Starknet, Cosmos/IBC
 - Web2 pentest, IoT/embedded, mobile red team, agentic AI red teaming, vehicle/CAN bus
@@ -165,7 +177,7 @@ Notable skill files: **AMRI** (Agent Manipulation Resistance Index — an open s
 - Model fingerprinting and behavioral analysis of AI alignment/guardrail weaknesses
 - Built and maintain **T.A.P. v8 — The Aetherverse Protocol**: a production-grade, browser-based automated testing pipeline with direct Anthropic API integration, batch vulnerability evaluation, real-time bypass scoring, payload detection/stripping, and audit logging
 
-**Tool suite** (sold via Gumroad/Whop):
+**Earlier tool suite** (sold via Gumroad/Whop):
 - **T.A.P. AUTOMATE** — recon orchestrator
 - **W.R.A.I.T.H.** — EVM audit tool with a live Foundry fork backend for exploit PoC simulation
 - **CICI** — 46-module OSINT platform
