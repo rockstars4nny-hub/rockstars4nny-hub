@@ -31,11 +31,11 @@ Local browser console for cyber intelligence + **IoT fabric** recon: one engage 
 
 Repo: **[rockstars4nny-hub/Finch](https://github.com/rockstars4nny-hub/Finch)**
 
-### 3. [FinchMobile](https://github.com/rockstars4nny-hub/FinchMobile) — iOS RF / IoT engagement
+### 3. FinchMobile — iOS RF / IoT engagement (**private**)
 
 Standalone **iOS 17+** app: BLE Nearby radar + GATT read, Glass Fabric LAN IoT assessment, multi-sensor track fusion, drone-class observe, AR overlay, consent/arm + forensic chain. No backend. Passive-by-default; active ops are consent-gated.
 
-Repo: **[rockstars4nny-hub/FinchMobile](https://github.com/rockstars4nny-hub/FinchMobile)**
+**Private repository** — access only with written authorization. Request: rockstars4nny@gmail.com
 
 ### 4. [IoT Scanner](https://github.com/rockstars4nny-hub/iot-offensive-security-research-tool) — camera / drone / embedded
 
@@ -47,7 +47,7 @@ Repo: **[rockstars4nny-hub/iot-offensive-security-research-tool](https://github.
 |------|---------|------|
 | **SPECTRA** | HackRF RF (RX/TX/replay/MITM) | [spectra](https://github.com/rockstars4nny-hub/spectra) |
 | **Finch** | Web — cyber intel + IoT fabric | [Finch](https://github.com/rockstars4nny-hub/Finch) |
-| **FinchMobile** | iOS — BLE + LAN IoT + tracks | [FinchMobile](https://github.com/rockstars4nny-hub/FinchMobile) |
+| **FinchMobile** | iOS — BLE + LAN IoT + tracks | Private — auth required |
 | **IoT Scanner** | UART / firmware / MAVLink / BLE | [iot-offensive-security-research-tool](https://github.com/rockstars4nny-hub/iot-offensive-security-research-tool) |
 
 ---
@@ -212,7 +212,7 @@ Currently a Registered Behavior Technician (RBT) working with autistic children,
 
 **[Finch / THE MACHINE](https://github.com/rockstars4nny-hub/Finch)** — Web operator console for cyber intel + IoT fabric recon (LAN/CIDR, cameras, enrichment).
 
-**[FinchMobile](https://github.com/rockstars4nny-hub/FinchMobile)** — iOS 17+ RF engagement app: BLE radar, Glass Fabric LAN IoT, track fusion, drone observe, consent-gated ops.
+**FinchMobile** (private) — iOS 17+ RF engagement app: BLE radar, Glass Fabric LAN IoT, track fusion, drone observe, consent-gated ops. Auth required.
 
 **[IoT Offensive Security Research Tool](https://github.com/rockstars4nny-hub/iot-offensive-security-research-tool)** — UART, firmware, network ports, MAVLink, BLE scanner for cameras/drones/embedded.
 
