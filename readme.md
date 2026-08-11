@@ -4,8 +4,8 @@
 
 > **Authorized use only.** Written Rules of Engagement required. These tools do not grant RF or network authority.
 
-> **NOT TO BE REPRODUCED.** Copyright © 2026 Hatari / Area44 LLC (Aetherverse Intelligence Protocol). All rights reserved.
-> Do not copy, redistribute, mirror, or create derivatives of AIP tooling (including SPECTRA, Finch, FinchMobile, and the IoT scanner) without prior written permission.
+> **NO USE WITHOUT AUTHORIZATION.** Copyright © 2026 Hatari / Area44 LLC (Aetherverse Intelligence Protocol). All rights reserved.
+> Proprietary AIP tooling (SPECTRA, Finch, FinchMobile, IoT scanner, and this hub) may not be used, copied, redistributed, or modified without prior written authorization. See [LICENSE](./LICENSE).
 
 ---
 
