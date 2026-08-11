@@ -1,6 +1,57 @@
-# AIP — AI Security Researcher
+# AIP — IoT Red Teaming Toolkit
 
-Solo founder, Area44 LLC (Aetherverse Intelligence Protocol). Web3/smart contract security, AI/LLM red teaming, offensive security tooling, OSINT.
+**Area44 LLC / Aetherverse Intelligence Protocol (AIP)** — authorized IoT, RF, and embedded red-team tooling for government and corporate engagements, plus Web3/AI security research.
+
+> **Authorized use only.** Written Rules of Engagement required. These tools do not grant RF or network authority.
+
+---
+
+## Start here — IoT / RF stack
+
+### 1. [SPECTRA](https://github.com/rockstars4nny-hub/spectra) — HackRF IoT RF assessment
+
+Host-side toolkit for **HackRF One / Pro / clones**: passive spectrum survey, IQ RX capture, gated TX, IQ **replay**, and half-duplex store-and-forward **MITM**. Engagement YAML (band allowlist, `tx_allowed` / `replay_allowed` / `mitm_allowed`), forbidden-band blocklist, custody SHA-256 logs, and NIST SP 800-53 / 800-213A / CSF-tagged reports.
+
+```bash
+pip install -e ".[dev]"   # from the spectra repo
+spectra doctor
+spectra survey --simulate --profile us_ism --out out/
+spectra rx --freq 433.92M --duration 5 --auth engagement.yaml --out out/
+spectra replay --iq out/evidence/….cs8 --freq 433.92M --agree-tx --agree-replay --auth engagement.yaml
+```
+
+Repo: **[rockstars4nny-hub/spectra](https://github.com/rockstars4nny-hub/spectra)**
+
+### 2. [Finch](https://github.com/rockstars4nny-hub/Finch) — web operator console (THE MACHINE)
+
+Local browser console for cyber intelligence + **IoT fabric** recon: one engage bar routes domains, people, CIDRs, and LAN hosts into identity / OSINT / fabric rails (ARP/MAC, SSDP, RTSP, cameras, enrichment). Built for authorized operator work.
+
+Repo: **[rockstars4nny-hub/Finch](https://github.com/rockstars4nny-hub/Finch)**
+
+### 3. [FinchMobile](https://github.com/rockstars4nny-hub/FinchMobile) — iOS RF / IoT engagement
+
+Standalone **iOS 17+** app: BLE Nearby radar + GATT read, Glass Fabric LAN IoT assessment, multi-sensor track fusion, drone-class observe, AR overlay, consent/arm + forensic chain. No backend. Passive-by-default; active ops are consent-gated.
+
+Repo: **[rockstars4nny-hub/FinchMobile](https://github.com/rockstars4nny-hub/FinchMobile)**
+
+### 4. [IoT Scanner](https://github.com/rockstars4nny-hub/iot-offensive-security-research-tool) — camera / drone / embedded
+
+Authorized assessor for UART console, firmware secret scan, network port discovery, MAVLink telemetry/signing checks, and BLE GATT enumeration — structured severity-tagged JSON findings.
+
+Repo: **[rockstars4nny-hub/iot-offensive-security-research-tool](https://github.com/rockstars4nny-hub/iot-offensive-security-research-tool)**
+
+| Tool | Surface | Repo |
+|------|---------|------|
+| **SPECTRA** | HackRF RF (RX/TX/replay/MITM) | [spectra](https://github.com/rockstars4nny-hub/spectra) |
+| **Finch** | Web — cyber intel + IoT fabric | [Finch](https://github.com/rockstars4nny-hub/Finch) |
+| **FinchMobile** | iOS — BLE + LAN IoT + tracks | [FinchMobile](https://github.com/rockstars4nny-hub/FinchMobile) |
+| **IoT Scanner** | UART / firmware / MAVLink / BLE | [iot-offensive-security-research-tool](https://github.com/rockstars4nny-hub/iot-offensive-security-research-tool) |
+
+---
+
+## Also from AIP
+
+Web3/smart-contract security, AI/LLM red teaming, OSINT, and the AMRI agent-manipulation framework live below. Contact: rockstars4nny@gmail.com · [GitHub](https://github.com/rockstars4nny-hub)
 
 ---
 
@@ -152,17 +203,23 @@ Currently a Registered Behavior Technician (RBT) working with autistic children,
 
 ## What I've Built
 
-### Recent tools (past 30 days)
+### IoT red teaming (primary)
 
-**Finch / THE MACHINE v3.5** — Self-hosted local operator console for authorized cyber intelligence, person-of-interest mapping, and IoT fabric recon. One engage input routes people, places, vehicles, domains, wallets, and local network scopes into identity, property, footprint, cyber, Web3, and IoT rails, then surfaces a unified operator brief. Built for authorized work; ephemeral by default with optional encrypted persistence.
+**[SPECTRA](https://github.com/rockstars4nny-hub/spectra)** — HackRF IoT RF assessment: spectrum survey, RX capture, gated TX, IQ replay, half-duplex MITM, ROE allowlists, NIST-mapped reports.
+
+**[Finch / THE MACHINE](https://github.com/rockstars4nny-hub/Finch)** — Web operator console for cyber intel + IoT fabric recon (LAN/CIDR, cameras, enrichment).
+
+**[FinchMobile](https://github.com/rockstars4nny-hub/FinchMobile)** — iOS 17+ RF engagement app: BLE radar, Glass Fabric LAN IoT, track fusion, drone observe, consent-gated ops.
+
+**[IoT Offensive Security Research Tool](https://github.com/rockstars4nny-hub/iot-offensive-security-research-tool)** — UART, firmware, network ports, MAVLink, BLE scanner for cameras/drones/embedded.
+
+### Other recent tools
 
 **POI (Person of Interest)** — Dossier workflow on Finch that expands an authorized subject seed across identity, online presence, property ownership, vehicle pivots, face enroll/match (consent where required), and a public-record footprint scorecard, with linked names cascading back into the same investigation loop.
 
 **AIP Web Suites** — Standalone browser consoles for first-pass Web2 and Web3 work. Web2 covers OSINT collection and handoff into a pentest planning matrix with client-side report export. Web3 covers chain intelligence and an audit matrix that only unlocks claim/PoC tooling after a real fork-executed proof — not checklist speculation. Authorized targets only.
 
 **P.S.M. 3.0 (Phishing Simulation Module)** — Authorized phishing simulation and awareness suite spanning Web2 and Web3 lure generation, engagement authorization gating, click tracking and enrichment, ClickFix/QR/SMS/OAuth flows, lookalike-domain and vishing aids, bulk target handling, ATT&CK mapping, and campaign export for planning and reporting. Written organizational authorization required.
-
-**IoT Offensive Security Research Tool** — Authorized assessment toolkit for cameras, drones, and embedded devices covering serial console access, firmware acquisition and offline analysis, network service discovery, MAVLink telemetry review, and Bluetooth LE enumeration, with structured findings output. Own devices or explicit written permission only.
 
 **Cyber Intelligence Framework** — Methodology for authorized digital fingerprinting and threat assessment across network, application, identity, media, underground, threat-intel, and geospatial domains, with correlation, risk scoring, graphing, and sanctions/compliance checks to reduce false positives and prioritize real exposure.
 
